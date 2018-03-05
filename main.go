@@ -26,7 +26,12 @@ func main() {
 
 	go func(channel syslog.LogPartsChannel) {
 		for logParts := range channel {
-			fmt.Println(logParts)
+			fmt.Printf("%v [%s/%d] %v",
+				logParts["timestamp"],
+				logParts["app_name"],
+				logParts["proc_id"],
+				logParts["message"],
+			)
 		}
 	}(channel)
 
